@@ -1,0 +1,19 @@
+/*
+ * @Author: Xiaorui Wang
+ * @Email: xiaorui.wang@usi.ch
+ * @Date: 2025-06-02 22:36:32
+ * @LastEditors: Xiaorui Wang
+ * @LastEditTime: 2025-06-02 23:09:22
+ * @Description: 
+ * 
+ * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
+ */
+
+
+import type {FC} from "react";
+
+export const ExtralContainer = () => {
+    return (
+        <div className='flex-1/4 bg-blue-300'>right extral</div>
+    );
+};
