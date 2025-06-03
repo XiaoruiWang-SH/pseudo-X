@@ -10,10 +10,9 @@
  */
 
 
-import type {FC} from "react";
 
 export const ExtralContainer = () => {
     return (
-        <div className='flex-1/4 bg-blue-300'>right extral</div>
+        <div>right extral</div>
     );
 };
