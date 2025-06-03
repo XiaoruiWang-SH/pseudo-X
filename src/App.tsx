@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-05-15 14:55:55
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-03 11:57:03
+ * @LastEditTime: 2025-06-03 16:03:46
  * @Description: 
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
@@ -22,7 +22,7 @@ function App() {
       <MainContainer>
         <>
           <div className='flex justify-center mx-70 h-dvh'>
-            <div className='flex-1/4 '>
+            <div className='flex-1/4 relative'>
               <MenuContainer />
             </div>
             <div className='flex-1/2 border-x-[0.5px] border-gray-500'>

@@ -14,6 +14,6 @@
 
 export const ContentContainer = () => {
     return (
-        <div>middle content</div>
+        <div className="py-2.5">middle content</div>
     );
 };
