@@ -22,13 +22,13 @@ function App() {
       <MainContainer>
         <>
           <div className='flex justify-center mx-70 h-dvh'>
-            <div className='flex-1/4 relative'>
+            <div className='flex-1/4 relative min-w-[250px]'>
               <MenuContainer />
             </div>
-            <div className='flex-2/4 border-x-[0.5px] border-gray-500 overflow-scroll'>
+            <div className='flex-2/4 border-x-[0.5px] border-gray-500 overflow-scroll  min-w-[500px]'>
               <ContentContainer />
             </div>
-            <div className='flex-1/4 '>
+            <div className='flex-1/4 min-w-[300px]'>
               <ExtralContainer />
             </div>
           </div>
