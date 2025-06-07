@@ -12,7 +12,7 @@
 import { MenuContainer } from './menu/MenuContainer'
 import { ContentContainer } from './content/ContentContainer'
 import { ExtralContainer } from './extral/ExtralContainer'
-
+import { Outlet } from 'react-router'
 
 
 function App() {
@@ -26,7 +26,8 @@ function App() {
               <MenuContainer />
             </div>
             <div className='flex-2/4 border-x-[0.5px] border-gray-500 overflow-scroll  min-w-[500px]'>
-              <ContentContainer />
+              {/* <ContentContainer /> */}
+              <Outlet />
             </div>
             <div className='flex-1/4 min-w-[300px]'>
               <ExtralContainer />

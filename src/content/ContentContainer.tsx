@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-06-02 22:34:33
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-03 21:19:36
+ * @LastEditTime: 2025-06-07 22:27:34
  * @Description:
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
@@ -17,6 +17,8 @@ import repost from "../assets/repost.svg"
 import like from "../assets/like.svg"
 import views from "../assets/views.svg"
 import share from "../assets/share.svg"
+import { ContentDetail } from "./ContentDetail"
+import { NavLink, useNavigate } from "react-router"
 
 interface PostItem {
     userImgUrl: string,
@@ -107,8 +109,12 @@ export const ContentContainer = () => {
 };
 
 const PostCell = (item: PostItem) => {
+    let navigate = useNavigate();
     return (
-        <div className="flex items-start gap-2.5 px-2.5 py-0.5 border-b-[0.5px] border-gray-300 hover:bg-gray-100">
+        <div className="flex items-start gap-2.5 px-2.5 py-0.5 border-b-[0.5px] border-gray-300 hover:bg-gray-100"
+            onClick={() => {
+                navigate("/detail");
+            }}>
             <img src={user} alt="userimg" />
             <div className="flex flex-col">
                 <TopBar userName={item.userName} userAccount={item.userAccount} time={item.time} />
@@ -177,7 +183,11 @@ const BottomBar = ({
             <div className="flex justify-around items-center text-sm gap-10">
                 <div className="flex justify-center items-center px-1 py-0.5 hover:bg-blue-200 hover:rounded-xl">
                     <img className="w-[20px]" src={comments} alt="comments" />
-                    <div>{commentCount}</div>
+                    <div>
+                        <NavLink to="/detail" end>
+                            {commentCount}
+                        </NavLink>
+                    </div>
                 </div>
                 <div className="flex justify-center items-center  px-1 py-0.5 hover:bg-green-200 hover:rounded-xl">
                     <img className="w-[20px]" src={repost} alt="repost" />
