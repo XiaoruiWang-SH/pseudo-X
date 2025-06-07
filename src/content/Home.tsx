@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-06-02 22:34:33
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-07 22:27:34
+ * @LastEditTime: 2025-06-07 23:07:46
  * @Description:
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
@@ -18,7 +18,7 @@ import like from "../assets/like.svg"
 import views from "../assets/views.svg"
 import share from "../assets/share.svg"
 import { ContentDetail } from "./ContentDetail"
-import { NavLink, useNavigate } from "react-router"
+import { NavLink, Link, useNavigate } from "react-router"
 
 interface PostItem {
     userImgUrl: string,
@@ -96,7 +96,7 @@ const sources: PostItem[] = [
     }
 ];
 
-export const ContentContainer = () => {
+export const Home = () => {
     return (
         <div className="py-2.5">
             {
@@ -184,9 +184,7 @@ const BottomBar = ({
                 <div className="flex justify-center items-center px-1 py-0.5 hover:bg-blue-200 hover:rounded-xl">
                     <img className="w-[20px]" src={comments} alt="comments" />
                     <div>
-                        <NavLink to="/detail" end>
-                            {commentCount}
-                        </NavLink>
+                        <Link to="/detail">{commentCount}</Link>
                     </div>
                 </div>
                 <div className="flex justify-center items-center  px-1 py-0.5 hover:bg-green-200 hover:rounded-xl">

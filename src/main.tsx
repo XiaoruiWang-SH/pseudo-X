@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-05-15 14:55:55
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-07 22:23:01
+ * @LastEditTime: 2025-06-07 23:05:21
  * @Description: 
  * 
  * 
@@ -14,16 +14,24 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import { ContentContainer } from './content/ContentContainer.tsx'
+import { Home } from './content/Home.tsx'
 import { ContentDetail } from './content/ContentDetail.tsx'
+import { Explore } from './content/Explore.tsx'
+import { Notification } from './content/Notification.tsx'
+import { Messages } from './content/Messages.tsx'
+import { Profile } from './content/Profile.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} >
-          <Route index element={<ContentContainer />} />
+          <Route index element={<Home />} />
           <Route path="detail" element={<ContentDetail />} />
+          <Route path="explore" element={<Explore />} />
+          <Route path="notification" element={<Notification />} />
+          <Route path="messages" element={<Messages />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>

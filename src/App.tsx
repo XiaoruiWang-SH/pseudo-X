@@ -10,7 +10,7 @@
  */
 
 import { MenuContainer } from './menu/MenuContainer'
-import { ContentContainer } from './content/ContentContainer'
+import { Home } from './content/Home'
 import { ExtralContainer } from './extral/ExtralContainer'
 import { Outlet } from 'react-router'
 
