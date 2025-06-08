@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-06-02 22:21:07
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-07 23:44:44
+ * @LastEditTime: 2025-06-08 22:07:44
  * @Description: 
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
@@ -18,21 +18,21 @@ import profile from "../assets/profile.svg"
 import more from "../assets/more.svg"
 import user from "../assets/user.svg"
 import more_account from "../assets/more_account.svg"
-import { useNavigate } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import { useState, useEffect, useRef } from "react"
 
 // const menuItems = ["Home", "Expore", "Notifications", "Messages", "Profile", "More"];
 const menuItems = [
     { imgsrc: home, title: "Home", route: "/", selected: true },
-    { imgsrc: explorer, title: "Explore", route: "explore", selected: false },
-    { imgsrc: notification, title: "Notifications", route: "notification", selected: false },
-    { imgsrc: messages, title: "Messages", route: "messages", selected: false },
-    { imgsrc: profile, title: "Profile", route: "profile", selected: false},
+    { imgsrc: explorer, title: "Explore", route: "/explore", selected: false },
+    { imgsrc: notification, title: "Notifications", route: "/notification", selected: false },
+    { imgsrc: messages, title: "Messages", route: "/messages", selected: false },
+    { imgsrc: profile, title: "Profile", route: "/profile", selected: false},
     { imgsrc: more, title: "More", selected: false },
 ];
 
 export const MenuContainer = () => {
-
+    let location = useLocation();
     let [selectItems, setSelectItems] = useState(menuItems);
 
     const clickEvent = (title: string) => {
@@ -46,9 +46,16 @@ export const MenuContainer = () => {
         setSelectItems(newItems);
     };
 
+    const queryItemTitle = (route: string) => {
+       return selectItems.find((ele, index, arr) => {
+            return ele.route == route;
+        });
+    };
+
     useEffect(() => {
-        clickEvent("Explore");
-    }, []);
+        let selectedItem = queryItemTitle(location.pathname);
+        clickEvent(selectedItem ? selectedItem.title : "Home");
+    }, [location]);
 
     return (
         <div className="flex flex-col gap-8 py-2.5">
@@ -58,9 +65,8 @@ export const MenuContainer = () => {
             <div className="flex flex-col gap-2">
                 {
                     selectItems.map((element, index, array) =>
-                        <div>
                             <MenuItem key={index} imgSrc={element.imgsrc} title={element.title} route={element.route} selected={element.selected} clickEvent={clickEvent} />
-                        </div>)
+                        )
                 }
             </div>
 
@@ -106,8 +112,7 @@ const MenuItem = ({ imgSrc, title, route, selected, clickEvent }: { imgSrc: stri
         <div className="flex justify-start items-center py-2.5 px-5 hover:bg-gray-200 hover:rounded-3xl"
             onClick={() => {
                 if (!route) return;
-                let link =  route == "/" ? "/" : `/${route}`
-                navigate(link);
+                navigate(route);
                 clickEvent(title);
             }}>
             <img className="w-[26px]" src={imgSrc} alt="imgSrc" />
