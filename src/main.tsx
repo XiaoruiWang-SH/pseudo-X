@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-05-15 14:55:55
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-07 23:05:21
+ * @LastEditTime: 2025-06-08 23:42:14
  * @Description: 
  * 
  * 
@@ -27,7 +27,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<App />} >
           <Route index element={<Home />} />
-          <Route path="detail" element={<ContentDetail />} />
+          <Route path=":postId" element={<ContentDetail />} />
           <Route path="explore" element={<Explore />} />
           <Route path="notification" element={<Notification />} />
           <Route path="messages" element={<Messages />} />

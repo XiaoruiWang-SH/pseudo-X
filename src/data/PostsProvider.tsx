@@ -1,26 +1,34 @@
 /*
  * @Author: Xiaorui Wang
  * @Email: xiaorui.wang@usi.ch
- * @Date: 2025-06-07 22:02:34
+ * @Date: 2025-06-08 22:28:56
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-08 23:37:43
+ * @LastEditTime: 2025-06-08 23:06:26
  * @Description: 
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
  */
 
-import { type PostItem } from "../data/PostsProvider";
-import { useContext } from "react";
-import { TasksContext } from "../data/PostsProvider";
-import  back  from "../assets/back.svg"
-import { PostCell, TopBar } from "./Home";
-import { useNavigate, useParams } from "react-router";
-import user from "../assets/user.svg"
+import { useReducer, createContext } from "react";
+
+export interface PostItem {
+    postId: string,
+    userImgUrl: string,
+    userName: string,
+    userAccount: string,
+    time: string,
+    content: string,
+    images: string[],
+    commentCount: string,
+    repostCount: string,
+    likeCount: string,
+    viewCount: string
+}
 
 
-const comment = [
+const sources: PostItem[] = [
     {
-        commentId: "001",
+        postId: "001",
         userImgUrl: "https://xxx.png",
         userName: "Warren English",
         userAccount: "TheWarEnglish",
@@ -33,7 +41,7 @@ const comment = [
         viewCount: "3.5M"
     },
     {
-        commentId: "002",
+        postId: "002",
         userImgUrl: "https://xxx.png",
         userName: "Warren English",
         userAccount: "TheWarEnglish",
@@ -46,7 +54,7 @@ const comment = [
         viewCount: "3.5M"
     },
     {
-        commentId: "003",
+        postId: "003",
         userImgUrl: "https://xxx.png",
         userName: "Warren English",
         userAccount: "TheWarEnglish",
@@ -59,7 +67,7 @@ const comment = [
         viewCount: "3.5M"
     },
     {
-        commentId: "004",
+        postId: "004",
         userImgUrl: "https://xxx.png",
         userName: "Warren English",
         userAccount: "TheWarEnglish",
@@ -72,7 +80,7 @@ const comment = [
         viewCount: "3.5M"
     },
     {
-        commentId: "005",
+        postId: "005",
         userImgUrl: "https://xxx.png",
         userName: "Warren English",
         userAccount: "TheWarEnglish",
@@ -85,44 +93,34 @@ const comment = [
         viewCount: "3.5M"
     }
 ];
- 
-export const ContentDetail = () => {
-    let navigate = useNavigate();
-    let postParams = useParams();
-    let posts = useContext(TasksContext) ?? [];
-    let post = posts.find((ele) => {
-        return ele.postId == postParams.postId;
-    })
-    return (
-        <div>
-            <div className="flex items-center m-2 gap-5"> 
-                <img className="w-[20px] h-[20px] p-0.5 px-1 hover:bg-gray-300 hover:rounded-[10px]" src={back} alt="back" 
-                onClick={() => {
-                    navigate(-1);
-                }} />
-                <div className="text-xl font-semibold">Post</div>
-            </div>
-            <PostCell {...post!} />
-            <div>
-                {comment.map((ele) => 
-                    <CommentCell key={ele.commentId} userName={ele.userName} userAccount={ele.userAccount} time={ele.time} content={ele.content} />
-                )}
-            </div>
-        </div>
-    );
-}
 
-const CommentCell = ({userName, userAccount, time, content} : {userName: string, userAccount: string, time: string, content: string} ) => {
+export const TasksContext = createContext<null | PostItem[]>(null);
+export const TasksDispatchContext = createContext<null | React.ActionDispatch<[action: {
+    type: string;
+    id: string;
+}]>>(null);
+
+export const PostsProvider = ({ children }: { children: React.ReactElement }) => {
+
+    const tasksReducer = (tasks: PostItem[], action: { type: string, id: string }) => {
+        switch (action.type) {
+            case "Home": {
+                return tasks;
+            }
+            default: {
+                return tasks;
+            }
+        }
+    };
+
+    const [tasks, dispatch] = useReducer(tasksReducer, sources);
+
+
     return (
-        <div className="flex items-start gap-2.5 px-2.5 py-0.5 border-b-[0.5px] border-gray-300 hover:bg-gray-100">
-            <img src={user} alt="userimg" />
-            <div className="flex flex-col">
-                <TopBar userName={userName} userAccount={userAccount} time={time} />
-                <div>
-                    {content}
-                </div>
-            </div>
-        </div>
+        <TasksContext.Provider value={tasks}>
+            <TasksDispatchContext.Provider value={dispatch}>
+                {children}
+            </TasksDispatchContext.Provider>
+        </TasksContext.Provider>
     );
 };
-

@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-06-02 22:34:33
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-07 23:07:46
+ * @LastEditTime: 2025-06-08 23:42:32
  * @Description:
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
@@ -19,101 +19,30 @@ import views from "../assets/views.svg"
 import share from "../assets/share.svg"
 import { ContentDetail } from "./ContentDetail"
 import { NavLink, Link, useNavigate } from "react-router"
-
-interface PostItem {
-    userImgUrl: string,
-    userName: string,
-    userAccount: string,
-    time: string,
-    content: string,
-    images: string[],
-    commentCount: string,
-    repostCount: string,
-    likeCount: string,
-    viewCount: string
-}
-
-const sources: PostItem[] = [
-    {
-        userImgUrl: "https://xxx.png",
-        userName: "Warren English",
-        userAccount: "TheWarEnglish",
-        time: "2025-07-03 16:04:30",
-        content: "This drug won a Nobel Prize…But now they're trying to hide it.Ivermectin.Here’s what it is, what it does, & why they don't want you to know the truth:",
-        images: ["https://image1.png", "https://image2.png", "https://image3.png"],
-        commentCount: "424",
-        repostCount: "7.7K",
-        likeCount: "29K",
-        viewCount: "3.5M"
-    },
-    {
-        userImgUrl: "https://xxx.png",
-        userName: "Warren English",
-        userAccount: "TheWarEnglish",
-        time: "2025-07-03 16:04:30",
-        content: "This drug won a Nobel Prize…But now they're trying to hide it.Ivermectin.Here’s what it is, what it does, & why they don't want you to know the truth:",
-        images: ["https://image1.png", "https://image2.png", "https://image3.png"],
-        commentCount: "424",
-        repostCount: "7.7K",
-        likeCount: "29K",
-        viewCount: "3.5M"
-    },
-    {
-        userImgUrl: "https://xxx.png",
-        userName: "Warren English",
-        userAccount: "TheWarEnglish",
-        time: "2025-07-03 16:04:30",
-        content: "This drug won a Nobel Prize…But now they're trying to hide it.Ivermectin.Here’s what it is, what it does, & why they don't want you to know the truth:",
-        images: ["https://image1.png", "https://image2.png", "https://image3.png"],
-        commentCount: "424",
-        repostCount: "7.7K",
-        likeCount: "29K",
-        viewCount: "3.5M"
-    },
-    {
-        userImgUrl: "https://xxx.png",
-        userName: "Warren English",
-        userAccount: "TheWarEnglish",
-        time: "2025-07-03 16:04:30",
-        content: "This drug won a Nobel Prize…But now they're trying to hide it.Ivermectin.Here’s what it is, what it does, & why they don't want you to know the truth:",
-        images: ["https://image1.png", "https://image2.png", "https://image3.png"],
-        commentCount: "424",
-        repostCount: "7.7K",
-        likeCount: "29K",
-        viewCount: "3.5M"
-    },
-    {
-        userImgUrl: "https://xxx.png",
-        userName: "Warren English",
-        userAccount: "TheWarEnglish",
-        time: "2025-07-03 16:04:30",
-        content: "This drug won a Nobel Prize…But now they're trying to hide it.Ivermectin.Here’s what it is, what it does, & why they don't want you to know the truth:",
-        images: ["https://image1.png", "https://image2.png", "https://image3.png"],
-        commentCount: "424",
-        repostCount: "7.7K",
-        likeCount: "29K",
-        viewCount: "3.5M"
-    }
-];
+import { useContext } from "react"
+import { TasksContext } from "../data/PostsProvider"
+import { type PostItem } from "../data/PostsProvider";
 
 export const Home = () => {
+    let posts = useContext(TasksContext) ?? [];
     return (
         <div className="py-2.5">
             {
-                sources.map((element, index, array) =>
-                    <PostCell key={index} {...element} />
+                posts.map((element, index, array) =>
+                    <PostCell key={element.postId} {...element} />
                 )
             }
         </div>
     );
 };
 
-const PostCell = (item: PostItem) => {
+export const PostCell = (item: PostItem) => {
     let navigate = useNavigate();
+    let postId = item.postId;
     return (
         <div className="flex items-start gap-2.5 px-2.5 py-0.5 border-b-[0.5px] border-gray-300 hover:bg-gray-100"
             onClick={() => {
-                navigate("/detail");
+                navigate(`/${postId}`);
             }}>
             <img src={user} alt="userimg" />
             <div className="flex flex-col">
@@ -128,7 +57,7 @@ const PostCell = (item: PostItem) => {
     );
 }
 
-const TopBar = ({ userName, userAccount, time }: { userName: string, userAccount: string, time: string }) => {
+export const TopBar = ({ userName, userAccount, time }: { userName: string, userAccount: string, time: string }) => {
 
     const getMonthFromNumber = (num: number) => {
         switch (num) {
