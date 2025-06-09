@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-06-02 22:34:33
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-08 23:42:32
+ * @LastEditTime: 2025-06-09 11:53:08
  * @Description:
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
@@ -26,7 +26,7 @@ import { type PostItem } from "../data/PostsProvider";
 export const Home = () => {
     let posts = useContext(TasksContext) ?? [];
     return (
-        <div className="py-2.5">
+        <div className="h-full overflow-scroll">
             {
                 posts.map((element, index, array) =>
                     <PostCell key={element.postId} {...element} />
