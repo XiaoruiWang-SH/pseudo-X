@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-06-02 22:21:07
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-08 22:07:44
+ * @LastEditTime: 2025-06-09 16:09:29
  * @Description: 
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
@@ -46,15 +46,34 @@ export const MenuContainer = () => {
         setSelectItems(newItems);
     };
 
-    const queryItemTitle = (route: string) => {
-       return selectItems.find((ele, index, arr) => {
-            return ele.route == route;
-        });
-    };
-
     useEffect(() => {
-        let selectedItem = queryItemTitle(location.pathname);
-        clickEvent(selectedItem ? selectedItem.title : "Home");
+        let route = location.pathname.split("/")[1];
+        switch (route) {
+            case "home": {
+                clickEvent("Home");
+                break;
+            }
+            case "explore": {
+                clickEvent("Explore");
+                break;
+            }
+            case "notification": {
+                clickEvent("Notifications");
+                break;
+            }
+            case "messages": {
+                clickEvent("Messages");
+                break;
+            }
+            case "profile": {
+                clickEvent("Profile");
+                break;
+            }
+            default: {
+                clickEvent("Home");
+            }
+        }
+
     }, [location]);
 
     return (
