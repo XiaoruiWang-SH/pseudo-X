@@ -3,7 +3,7 @@
  * @Email: xiaorui.wang@usi.ch
  * @Date: 2025-06-02 22:36:32
  * @LastEditors: Xiaorui Wang
- * @LastEditTime: 2025-06-06 12:15:31
+ * @LastEditTime: 2025-06-09 20:11:28
  * @Description: 
  * 
  * Copyright (c) 2025 by Xiaorui Wang, All Rights Reserved. 
@@ -12,6 +12,8 @@
 import search from "../assets/search.svg"
 import more from "../assets/more_account.svg"
 import user from "../assets/user.svg"
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 
 const happendingContent = [
@@ -56,10 +58,34 @@ const followContent = [
 ];
 
 export const ExtralContainer = () => {
+    let location = useLocation();
+    let [isExplore, setIsExplore] = useState(false);
+
+    useEffect(() => {
+        let route = location.pathname.split("/")[1];
+        switch (route) {
+            case "explore": {
+                setIsExplore(true);
+                break;
+            }
+            default: {
+                setIsExplore(false);
+            }
+        }
+
+    }, [location]);
+
     return (
         <div className="py-2.5 mx-5 flex flex-col gap-[20px]">
-            <SearchBar />
-            <WhatHappending />
+            {
+                isExplore ?
+                    <></>
+                    :
+                    <>
+                        <SearchBar />
+                        <WhatHappending />
+                    </>
+            }
             <WhoToFollow />
         </div>
     );
@@ -97,11 +123,11 @@ const WhatHappending = () => {
 }
 
 
-const TrendCell = ({title, topic, number}:{
-        title: string,
-        topic: string,
-        number: string
-    }) => {
+const TrendCell = ({ title, topic, number }: {
+    title: string,
+    topic: string,
+    number: string
+}) => {
     return (
         <div className="flex justify-between items-start">
             <div className="flex flex-col">
@@ -134,7 +160,7 @@ const WhoToFollow = () => {
     );
 }
 
-const FollowCell = ({userName, userAccount, head} : {userName: string, userAccount: string, head: string}) => {
+const FollowCell = ({ userName, userAccount, head }: { userName: string, userAccount: string, head: string }) => {
     return (
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-1">
